@@ -3,7 +3,19 @@
 {% block title %}Home - Ignite Flask App{% endblock %}
 
 {% block content %}
-    <h2>This is the Home Page</h2>
-     <!-- Add the logo -->
-     <img src="{{ url_for('static', filename='img/logo.webp') }}" alt="Logo" width="200">
+<body>
+    <h1>Text Proofreader</h1>
+
+    <form method="POST">
+        <textarea name="text" rows="10" cols="50" placeholder="Enter your text here..."></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+    <h2>Corrected Text:</h2>
+    <div>
+        {{ result|safe }}
+    </div>
+    {% endif %}
+</body>
 {% endblock %}
