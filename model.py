@@ -7,7 +7,7 @@ def get_completion(prompt):
     client = Together(api_key=get_together_api_key())
 
     output = client.chat.completions.create(
-        model="meta-llama/Llama-3-70b-chat-hf",
+        model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
         messages=[
             {"role": "user", "content": prompt}
         ],
