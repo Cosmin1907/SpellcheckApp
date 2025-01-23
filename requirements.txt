@@ -1,1 +1,5 @@
-Flask
+Flask          # Flask framework for the web app
+together       # Replace with the correct version of Together API
+redlines       # Or the latest version of Redlines
+IPython        # Or the version you're using for notebook display
+python-dotenv  # For loading environment variables (optional for API key)
