@@ -20,6 +20,7 @@ def get_completion(prompt):
 def process_text(original_text):
     prompt = f"""proofread and correct this text: ```{original_text}``` 
         instructions:
+        - consider the text is written in British English
         - correct any spelling or grammar mistakes
         - make sure the text is clear and easy to read
         - return only the corected version without any additional comments or suggestions"""
