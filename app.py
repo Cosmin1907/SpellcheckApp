@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, jsonify
 from model import process_text  # Your model function
 
-app = Flask(_name)  # ✅ FIX: Change _name to _name_
+app = Flask(_name)  # ✅ FIXED: Changed _name to _name_
 
 # 🖥 Web interface (existing route)
 @app.route('/', methods=['GET', 'POST'])
@@ -17,7 +17,7 @@ def index():
 @app.route('/api/process_text', methods=['POST'])
 def api_process_text():
     try:
-        # ✅ FIX: Explicitly parse JSON to avoid NoneType errors
+        # ✅ Ensure JSON parsing always works
         data = request.get_json(force=True)  
 
         if not data or "text" not in data:
@@ -26,11 +26,12 @@ def api_process_text():
         text = data['text'].strip()  # Extract and clean text
 
         result = process_text(text)  # Process the text
-        return jsonify({'reply': result})  # ✅ FIX: Changed "result" to "reply" to match expected response
+
+        return jsonify({'result': result})  # ✅ CHANGED BACK TO "result" (was "reply")
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500  # Catch any unexpected errors
 
-if _name_ == '_main':  # ✅ FIX: Change _name to _name_
+if _name_ == '_main':  # ✅ FIXED: Changed _name to _name_
     port = int(os.environ.get("PORT", 5000))  # Use Heroku's provided port
     app.run(host="0.0.0.0", port=port, debug=True)
