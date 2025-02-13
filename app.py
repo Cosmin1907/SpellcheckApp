@@ -28,5 +28,5 @@ def api_process_text():
     return jsonify({'result': result})  # Send back the response
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 500))  # Use Heroku's provided port
+    port = int(os.environ.get("PORT", 200))  # Use Heroku's provided port
     app.run(host="0.0.0.0", port=port, debug=True)
