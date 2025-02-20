@@ -1,8 +1,10 @@
 import os
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS  # Import CORS
 from model import process_text  # Your model function
 
 app = Flask(__name__)
+CORS(app)  # 🔥 Enable CORS for all routes (required for WordPress)
 
 # 🖥️ Web interface (existing route)
 @app.route('/', methods=['GET', 'POST'])
@@ -26,6 +28,16 @@ def api_process_text():
     result = process_text(text)  # Process the text
 
     return jsonify({'result': result})  # Send back the response
+
+# 📩 Handle text input from HTMX (WordPress)
+@app.route('/process_text', methods=['POST'])
+def process_text_route():
+    text = request.form.get('text', '')  # Get input text
+    if not text:
+        return "<p class='error'>Please enter some text.</p>", 400  # Handle empty input
+
+    result = process_text(text)  # Process the input using your function
+    return f"<p class='result'>{result}</p>"  # Return updated HTML snippet
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Use Heroku's provided port
